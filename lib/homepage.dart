@@ -122,7 +122,7 @@ class HomePage extends StatelessWidget {
                         OutlinedButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.live_tv),
-                          label: const Text('Classes'),
+                          label: const Text('Class'),
                         ),
                       ],
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dashboard.dart';
+import 'chatbot.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -189,9 +190,18 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Color(0xFFA435F0),
+        onTap: (index) {
+          // Handle navigation based on index
+          if (index == 1) { // Assuming chatbot is the second item
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ChatbotScreen()),
+            );
+          }
+        },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'), // Changed to chat icon
           BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Premium'),
           BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'More'),
         ],

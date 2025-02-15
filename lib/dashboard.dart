@@ -88,7 +88,7 @@ class Dashboard extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 children: [
                   _buildCourseCard(
-                    'React.js',
+                    'Mathematics',
                     'English',
                     0,
                     'Start Learning',
@@ -96,7 +96,7 @@ class Dashboard extends StatelessWidget {
                     secondaryColor,
                   ),
                   _buildCourseCard(
-                    'Node.js',
+                    'History',
                     'English',
                     0,
                     'Start Learning',
@@ -104,7 +104,7 @@ class Dashboard extends StatelessWidget {
                     secondaryColor,
                   ),
                   _buildCourseCard(
-                    'Python Zero to Hero',
+                    'English',
                     'English',
                     47,
                     'Resume Learning',
@@ -112,7 +112,7 @@ class Dashboard extends StatelessWidget {
                     secondaryColor,
                   ),
                   _buildCourseCard(
-                    'Mastering MongoDB',
+                    'Science',
                     'English',
                     0,
                     'Start Learning',
@@ -156,10 +156,7 @@ class Dashboard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           Row(

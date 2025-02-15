@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
+                  backgroundColor: Color(0xFFA435F0),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),

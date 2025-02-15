@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'services/gemini_service.dart';
 
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({Key? key}) : super(key: key);
@@ -33,7 +34,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       ),
       body: Column(
         children: [
-          // Chat messages area
           Expanded(
             child: Container(
               color: Colors.grey[50],
@@ -48,7 +48,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
             ),
           ),
 
-          // Loading indicator
           if (_isLoading)
             Container(
               padding: const EdgeInsets.all(8),
@@ -59,7 +58,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
               ),
             ),
 
-          // Input area
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -172,20 +170,13 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       _isLoading = true;
     });
 
-    // Scroll to bottom
     _scrollToBottom();
 
-    // TODO: Implement Gemini API call here
-    // For now, we'll simulate a response
-    await Future.delayed(const Duration(seconds: 2));
+    // Fetch AI response from Gemini API
+    final botResponse = await GeminiService.getResponse(userMessage);
 
     setState(() {
-      _messages.add(
-        ChatMessage(
-          text: "This is a simulated response. Implement Gemini API here.",
-          isUser: false,
-        ),
-      );
+      _messages.add(ChatMessage(text: botResponse, isUser: false));
       _isLoading = false;
     });
 

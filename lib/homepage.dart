@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 8),
                     SizedBox(
                       width: double.infinity,
-                        child: ElevatedButton(
+                      child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFFA435F0),
@@ -159,16 +159,18 @@ class HomePage extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Dashboard()),
-                      );
-                      }, 
-                      child: const Text('View all')
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Dashboard(),
+                          ),
+                        );
+                      },
+                      child: const Text('View all'),
                     ),
-                    ],
-                  ),
-                  ),
+                  ],
+                ),
+              ),
 
               // Course Cards
               SizedBox(
@@ -191,8 +193,7 @@ class HomePage extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Color(0xFFA435F0),
         onTap: (index) {
-          // Handle navigation based on index
-          if (index == 1) { // Assuming chatbot is the second item
+          if (index == 1) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ChatbotScreen()),
@@ -201,9 +202,9 @@ class HomePage extends StatelessWidget {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'), // Changed to chat icon
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Premium'),
-          BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'More'),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'More'),
         ],
       ),
     );

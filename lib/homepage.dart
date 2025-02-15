@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dashboard.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -35,11 +36,9 @@ class HomePage extends StatelessWidget {
                           icon: const Icon(Icons.notifications),
                           onPressed: () {},
                         ),
-                        const CircleAvatar(
-                          radius: 20,
-                          backgroundImage: NetworkImage(
-                            'https://via.placeholder.com/150',
-                          ),
+                        IconButton(
+                          icon: const Icon(Icons.account_circle),
+                          onPressed: () {},
                         ),
                       ],
                     ),
@@ -58,7 +57,7 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green[700],
+                        color: const Color(0xFFA435F0),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -68,7 +67,7 @@ class HomePage extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.green[100],
+                        color: const Color.fromARGB(255, 232, 209, 246),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -88,7 +87,7 @@ class HomePage extends StatelessWidget {
                 margin: const EdgeInsets.all(16),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.green[50],
+                  color: Color.fromARGB(255, 232, 209, 246),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -105,9 +104,9 @@ class HomePage extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       children: [
-                        Chip(label: Text('Data Science')),
-                        Chip(label: Text('Full Stack')),
-                        Chip(label: Text('Machine Learning')),
+                        Chip(label: Text('English')),
+                        Chip(label: Text('Mathematics')),
+                        Chip(label: Text('Science')),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -117,24 +116,27 @@ class HomePage extends StatelessWidget {
                         OutlinedButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.work),
-                          label: const Text('Placement'),
+                          label: const Text('Career Programs'),
                         ),
                         OutlinedButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.live_tv),
-                          label: const Text('Live Classes'),
+                          label: const Text('Classes'),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
+                        child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: Color(0xFFA435F0),
                         ),
-                        child: const Text('Know More'),
+                        child: const Text(
+                          'Know More',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ],
@@ -154,10 +156,18 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextButton(onPressed: () {}, child: const Text('View all')),
-                  ],
-                ),
-              ),
+                    TextButton(
+                      onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Dashboard()),
+                      );
+                      }, 
+                      child: const Text('View all')
+                    ),
+                    ],
+                  ),
+                  ),
 
               // Course Cards
               SizedBox(
@@ -166,9 +176,9 @@ class HomePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: [
-                    _buildCourseCard('Flutter Development'),
+                    _buildCourseCard(''),
                     const SizedBox(width: 16),
-                    _buildCourseCard('Python Programming'),
+                    _buildCourseCard('Mathematics'),
                   ],
                 ),
               ),
@@ -178,7 +188,7 @@ class HomePage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.green,
+        selectedItemColor: Color(0xFFA435F0),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
@@ -225,7 +235,7 @@ class HomePage extends StatelessWidget {
                   children: const [
                     Icon(Icons.language, size: 16),
                     SizedBox(width: 4),
-                    Text('English'),
+                    Text('Science'),
                   ],
                 ),
               ],

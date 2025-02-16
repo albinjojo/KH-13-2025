@@ -4,6 +4,7 @@ import 'chatbot.dart';
 import 'subjects/science.dart';
 import 'subjects/maths.dart';
 import 'premium.dart';
+import 'account_center.dart';
 import 'dart:async';
 
 class HomePage extends StatefulWidget {
@@ -78,7 +79,14 @@ class _HomePageState extends State<HomePage> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.account_circle),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AccountCenter(),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

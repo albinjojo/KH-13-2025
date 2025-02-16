@@ -4,9 +4,45 @@ import 'chatbot.dart';
 import 'subjects/science.dart';
 import 'subjects/maths.dart';
 import 'premium.dart';
+import 'dart:async';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<String> promoImages = [
+    'assets/promo/promo 1.png',
+    'assets/promo/promo 2.png',
+    'assets/promo/promo 3.png',
+    'assets/promo/promo 4.png',
+  ];
+
+  int _currentImageIndex = 0;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startImageRotation();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void _startImageRotation() {
+    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
+      setState(() {
+        _currentImageIndex = (_currentImageIndex + 1) % promoImages.length;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,61 +125,71 @@ class HomePage extends StatelessWidget {
               // Promotional Banner
               Container(
                 margin: const EdgeInsets.all(16),
-                padding: const EdgeInsets.all(16),
+                height: 200, // Fixed height for the banner
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 232, 209, 246),
                   borderRadius: BorderRadius.circular(16),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Enroll in Career Programs',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Wrap(
-                      spacing: 8,
-                      children: [
-                        Chip(label: Text('English')),
-                        Chip(label: Text('Mathematics')),
-                        Chip(label: Text('Science')),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.work),
-                          label: const Text('Career Programs'),
-                        ),
-                        OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.live_tv),
-                          label: const Text('Class'),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFA435F0),
-                        ),
-                        child: const Text(
-                          'Know More',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
                     ),
                   ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Stack(
+                    children: [
+                      // Image carousel
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 500),
+                        child: Image.asset(
+                          promoImages[_currentImageIndex],
+                          key: ValueKey<int>(_currentImageIndex),
+                          width: double.infinity,
+                          height: 200,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      // Gradient overlay
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.transparent,
+                              Colors.black.withOpacity(0.7),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Dots indicator
+                      Positioned(
+                        bottom: 16,
+                        left: 0,
+                        right: 0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            promoImages.length,
+                            (index) => Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 4),
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color:
+                                    _currentImageIndex == index
+                                        ? Colors.white
+                                        : Colors.white.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 

@@ -64,6 +64,10 @@ flutter:
     - assets/icons/google icon.png
     - assets/icons/maths.png
     - assets/icons/science.png
+    - assets/promo/promo 1.png
+    - assets/promo/promo 2.png
+    - assets/promo/promo 3.png
+    - assets/promo/promo 4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

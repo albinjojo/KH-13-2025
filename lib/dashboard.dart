@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'subjects/science.dart';
+import 'subjects/maths.dart';
+import 'subjects/history.dart';
+import 'subjects/english.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -94,6 +98,7 @@ class Dashboard extends StatelessWidget {
                     'Start Learning',
                     primaryColor,
                     secondaryColor,
+                    context,
                   ),
                   _buildCourseCard(
                     'History',
@@ -102,6 +107,7 @@ class Dashboard extends StatelessWidget {
                     'Start Learning',
                     primaryColor,
                     secondaryColor,
+                    context,
                   ),
                   _buildCourseCard(
                     'English',
@@ -110,6 +116,7 @@ class Dashboard extends StatelessWidget {
                     'Resume Learning',
                     primaryColor,
                     secondaryColor,
+                    context,
                   ),
                   _buildCourseCard(
                     'Science',
@@ -118,6 +125,7 @@ class Dashboard extends StatelessWidget {
                     'Start Learning',
                     primaryColor,
                     secondaryColor,
+                    context,
                   ),
                 ],
               ),
@@ -135,6 +143,7 @@ class Dashboard extends StatelessWidget {
     String buttonText,
     Color primaryColor,
     Color secondaryColor,
+    BuildContext context,
   ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -183,7 +192,42 @@ class Dashboard extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                switch (title) {
+                  case 'Mathematics':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MathsPage(),
+                      ),
+                    );
+                    break;
+                  case 'Science':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SciencePage(),
+                      ),
+                    );
+                    break;
+                  case 'History':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HistoryPage(),
+                      ),
+                    );
+                    break;
+                  case 'English':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EnglishPage(),
+                      ),
+                    );
+                    break;
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
                 shape: RoundedRectangleBorder(

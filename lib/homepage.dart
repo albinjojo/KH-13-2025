@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dashboard.dart';
 import 'chatbot.dart';
+import 'subjects/science.dart';
+import 'subjects/maths.dart';
+import 'premium.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -179,9 +182,9 @@ class HomePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: [
-                    _buildCourseCard(''),
+                    _buildCourseCard(context, 'Mathematics'),
                     const SizedBox(width: 16),
-                    _buildCourseCard('Mathematics'),
+                    _buildCourseCard(context, 'Science'),
                   ],
                 ),
               ),
@@ -196,60 +199,137 @@ class HomePage extends StatelessWidget {
           if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ChatbotScreen()),
+              MaterialPageRoute(
+                builder: (context) => const ChatbotScreen(),
+              ), //navigate to chatbotpage
+            );
+          }
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Dashboard(),
+              ), //navigate to dashboardpage
+            );
+          }
+          if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PremiumPage()),
             );
           }
         },
+
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
+          BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Explore'),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Premium'),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'More'),
         ],
       ),
     );
   }
 
-  Widget _buildCourseCard(String title) {
+  Widget _buildCourseCard(BuildContext context, String title) {
+    String imageUrl = '';
+    String courseTitle = '';
+    String subjectText = '';
+    IconData subjectIcon = Icons.school;
+
+    // Set course-specific content
+    if (title == 'Mathematics') {
+      imageUrl = 'assets/icons/maths.png';
+      courseTitle = 'Mathematics';
+      subjectText = 'Mathematics';
+      subjectIcon = Icons.calculate;
+    } else {
+      imageUrl = 'assets/icons/science.png';
+      courseTitle = 'Science';
+      subjectText = 'Science';
+      subjectIcon = Icons.science;
+    }
+
     return Container(
       width: 280,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            child: Image.network(
-              'https://via.placeholder.com/280x120',
+            child: Image.asset(
+              imageUrl,
               height: 120,
               width: double.infinity,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                print('Error loading image: $error');
+                return Container(
+                  height: 120,
+                  color: Colors.grey[200],
+                  child: const Center(
+                    child: Icon(Icons.image, size: 40, color: Colors.grey),
+                  ),
+                );
+              },
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+            child: GestureDetector(
+              onTap: () {
+                if (title == 'Mathematics') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MathsPage()),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SciencePage(),
+                    ),
+                  );
+                }
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    courseTitle,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18,
+                      color: Color(0xFFA435F0),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: const [
-                    Icon(Icons.language, size: 16),
-                    SizedBox(width: 4),
-                    Text('Science'),
-                  ],
-                ),
-              ],
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(subjectIcon, size: 18, color: Colors.grey[700]),
+                      const SizedBox(width: 4),
+                      Text(
+                        subjectText,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
